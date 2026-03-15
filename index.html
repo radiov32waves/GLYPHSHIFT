@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLYPHSHIFT — Secret Encoded Messages</title>
+
+<!-- PWA / Home Screen support -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GLYPHSHIFT">
+<meta name="application-name" content="GLYPHSHIFT">
+<meta name="theme-color" content="#06070f">
+<meta name="description" content="Encode secret messages using glyphs from Japanese, Arabic, Korean, Chinese and more.">
+
+<!-- Home screen icon (all devices) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzA2MDcwZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZDBmMWUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InRleHRncmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzdlZmNmNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZjN2VmYSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmY2U4N2UiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93Ij4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJjb2xvcmVkQmx1ciIvPgogICAgICA8ZmVNZXJnZT48ZmVNZXJnZU5vZGUgaW49ImNvbG9yZWRCbHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDwhLS0gQmFja2dyb3VuZCByb3VuZGVkIHNxdWFyZSAtLT4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjkwIiByeT0iOTAiIGZpbGw9InVybCgjYmcpIi8+CiAgPCEtLSBCb3JkZXIgZ2xvdyAtLT4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjkwIiByeT0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCN0ZXh0Z3JhZCkiIHN0cm9rZS13aWR0aD0iNiIgb3BhY2l0eT0iMC42Ii8+CiAgPCEtLSBEZWNvcmF0aXZlIGdseXBocyB0b3AgLS0+CiAgPHRleHQgeD0iMjU2IiB5PSIxMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSI1MiIgZmlsbD0iIzdlZmNmNiIgb3BhY2l0eT0iMC4zIiBmaWx0ZXI9InVybCgjZ2xvdykiPuOBgiDZgyDtlZw8L3RleHQ+CiAgPCEtLSBHTFlQSCB0ZXh0IC0tPgogIDx0ZXh0IHg9IjI1NiIgeT0iMjQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LXNpemU9Ijg4IiBmaWxsPSJ1cmwoI3RleHRncmFkKSIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5HTFlQSDwvdGV4dD4KICA8IS0tIFNISUZUIHRleHQgLS0+CiAgPHRleHQgeD0iMjU2IiB5PSIzMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtc2l6ZT0iODgiIGZpbGw9InVybCgjdGV4dGdyYWQpIiBmaWx0ZXI9InVybCgjZ2xvdykiPlNISUZUPC90ZXh0PgogIDwhLS0gRGVjb3JhdGl2ZSBnbHlwaHMgYm90dG9tIC0tPgogIDx0ZXh0IHg9IjI1NiIgeT0iNDEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iNTIiIGZpbGw9IiNmYzdlZmEiIG9wYWNpdHk9IjAuMyIgZmlsdGVyPSJ1cmwoI2dsb3cpIj7OtCDRiCDimLA8L3RleHQ+Cjwvc3ZnPgo=">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzA2MDcwZiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZDBmMWUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9InRleHRncmFkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzdlZmNmNiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZjN2VmYSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNmY2U4N2UiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8ZmlsdGVyIGlkPSJnbG93Ij4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNiIgcmVzdWx0PSJjb2xvcmVkQmx1ciIvPgogICAgICA8ZmVNZXJnZT48ZmVNZXJnZU5vZGUgaW49ImNvbG9yZWRCbHVyIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iOTAiIHJ5PSI5MCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjkwIiByeT0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCN0ZXh0Z3JhZCkiIHN0cm9rZS13aWR0aD0iNiIgb3BhY2l0eT0iMC42Ii8+CiAgPHRleHQgeD0iMjU2IiB5PSIyNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZvbnQtc2l6ZT0iODgiIGZpbGw9InVybCgjdGV4dGdyYWQpIiBmaWx0ZXI9InVybCgjZ2xvdykiPkdMWVBIPC90ZXh0PgogIDx0ZXh0IHg9IjI1NiIgeT0iMzMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgc2VyaWYiIGZvbnQtd2VpZ2h0PSJib2xkIiBmb250LXNpemU9Ijg4IiBmaWxsPSJ1cmwoI3RleHRncmFkKSIgZmlsdGVyPSJ1cmwoI2dsb3cpIj5TSElGVDwvdGV4dD4KPC9zdmc+Cg==">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Share+Tech+Mono&family=Noto+Serif+JP&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06070f;
+    --surface: #0d0f1e;
+    --border: #1e2240;
+    --accent: #7efcf6;
+    --accent2: #fc7efa;
+    --accent3: #fce87e;
+    --glow: rgba(126,252,246,0.18);
+    --text: #c8d0f0;
+    --muted: #4a5070;
+    --danger: #fc7e7e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    overflow-x: hidden;
+  }
+
+  /* Animated star/particle background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(126,252,246,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 70%, rgba(252,126,250,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 15%, rgba(252,232,126,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 60%, rgba(126,252,246,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 90%, rgba(252,126,250,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 40%, rgba(126,252,246,0.3) 0%, transparent 100%),
+      radial-gradient(600px 600px at 20% 30%, rgba(126,252,246,0.04) 0%, transparent 70%),
+      radial-gradient(500px 500px at 80% 70%, rgba(252,126,250,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Scanline effect */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.07) 2px,
+      rgba(0,0,0,0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .logo-glyphs {
+    font-size: 2rem;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    animation: flicker 6s infinite;
+  }
+
+  h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.2rem, 7vw, 4.5rem);
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 30px rgba(126,252,246,0.4));
+    line-height: 1.1;
+  }
+
+  .tagline {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 36px 40px;
+    width: 100%;
+    max-width: 640px;
+    position: relative;
+    box-shadow: 0 0 60px rgba(126,252,246,0.05), 0 0 0 1px rgba(126,252,246,0.04);
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+  }
+
+  .tab {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .tab:first-child { border-right: 1px solid var(--border); }
+
+  .tab.active {
+    color: var(--accent);
+    background: rgba(126,252,246,0.06);
+  }
+
+  .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .tab:hover:not(.active) { color: var(--text); }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* LABELS */
+  label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  /* INPUTS */
+  input[type="text"], textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+  }
+
+  input[type="text"]:focus, textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 16px rgba(126,252,246,0.12);
+  }
+
+  input[type="text"]::placeholder, textarea::placeholder {
+    color: var(--muted);
+  }
+
+  /* BUTTON */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+    z-index: -1;
+  }
+
+  .btn:hover {
+    color: var(--bg);
+    box-shadow: 0 0 24px rgba(126,252,246,0.3);
+  }
+
+  .btn:hover::before { transform: scaleX(1); }
+
+  .btn.decode-btn {
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  .btn.decode-btn::before { background: var(--accent2); }
+
+  .btn.decode-btn:hover {
+    color: var(--bg);
+    box-shadow: 0 0 24px rgba(252,126,250,0.3);
+  }
+
+  /* OUTPUT AREA */
+  .output-area {
+    margin-top: 28px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s ease;
+  }
+
+  .output-area.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .output-box {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    padding: 20px 18px;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+    word-break: break-all;
+    min-height: 70px;
+    position: relative;
+  }
+
+  .output-box .glyph-char {
+    display: inline-block;
+    animation: glyphIn 0.4s ease both;
+  }
+
+  .decode-result {
+    text-align: center;
+    padding: 24px;
+  }
+
+  .decode-result .original-word {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 4vw, 2rem);
+    background: linear-gradient(135deg, var(--accent2), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(252,126,250,0.5));
+    animation: revealWord 0.6s ease both;
+    word-break: break-word;
+    white-space: normal;
+    line-height: 1.6;
+  }
+
+  .decode-result .decode-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* COPY BUTTON */
+  .copy-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .copy-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover {
+    border-color: var(--accent3);
+    color: var(--accent3);
+  }
+
+  .copy-status {
+    font-size: 0.72rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    letter-spacing: 0.15em;
+  }
+
+  .copy-status.show { opacity: 1; }
+
+  /* INFO / HOW IT WORKS */
+  .info-strip {
+    max-width: 640px;
+    width: 100%;
+    margin-top: 24px;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    background: rgba(252,232,126,0.03);
+    animation: fadeUp 0.8s 0.4s ease both;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .info-strip strong {
+    color: var(--accent3);
+    letter-spacing: 0.1em;
+  }
+
+  /* FLOATING GLYPHS BG */
+  .float-glyphs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .float-glyph {
+    position: absolute;
+    font-size: 1.4rem;
+    color: rgba(126,252,246,0.04);
+    animation: floatUp linear infinite;
+    user-select: none;
+  }
+
+  /* AUTO-DETECT BADGE */
+  .auto-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    border: 1px solid rgba(252,126,250,0.3);
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+    animation: pulse 2s ease infinite;
+  }
+
+  /* ERROR */
+  .error-msg {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 10px;
+    letter-spacing: 0.1em;
+    display: none;
+  }
+
+  .error-msg.show { display: block; }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes glyphIn {
+    from { opacity: 0; transform: translateY(-6px) scale(0.8); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes revealWord {
+    0% { opacity: 0; transform: scale(0.7) rotate(-3deg); filter: blur(10px) drop-shadow(0 0 40px rgba(252,126,250,0.8)); }
+    60% { transform: scale(1.05) rotate(1deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  @keyframes flicker {
+    0%, 95%, 100% { opacity: 1; }
+    96% { opacity: 0.4; }
+    97% { opacity: 1; }
+    98% { opacity: 0.2; }
+    99% { opacity: 1; }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 48px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-align: center;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  footer a { color: var(--muted); text-decoration: underline; }
+
+  /* GITHUB DEPLOY SECTION */
+  .deploy-section {
+    max-width: 640px;
+    width: 100%;
+    margin-top: 28px;
+    animation: fadeUp 0.8s 0.5s ease both;
+  }
+
+  .deploy-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.2s;
+  }
+
+  .deploy-toggle:hover { color: var(--text); border-color: var(--text); }
+
+  .deploy-body {
+    display: none;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-top: none;
+    background: rgba(0,0,0,0.2);
+    font-size: 0.78rem;
+    line-height: 2;
+    color: var(--muted);
+  }
+
+  .deploy-body.open { display: block; }
+
+  .deploy-body ol { padding-left: 20px; }
+  .deploy-body li { margin-bottom: 6px; }
+  .deploy-body strong { color: var(--text); }
+  .deploy-body code {
+    background: rgba(126,252,246,0.08);
+    color: var(--accent);
+    padding: 1px 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85em;
+  }
+
+  @media (max-width: 500px) {
+    .card { padding: 24px 18px; }
+    .output-box { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Social icons top right -->
+<div style="position:fixed; top:18px; right:20px; z-index:100; display:flex; gap:12px; align-items:center;">
+  <a href="https://www.instagram.com/radio.v32waves" target="_blank" title="Instagram" style="display:flex; align-items:center; justify-content:center; width:38px; height:38px; border:1px solid #1e2240; background:rgba(13,15,30,0.8); backdrop-filter:blur(8px); border-radius:8px; transition:all 0.2s; text-decoration:none;" onmouseover="this.style.borderColor='#fc7efa'; this.style.boxShadow='0 0 16px rgba(252,126,250,0.3)'" onmouseout="this.style.borderColor='#1e2240'; this.style.boxShadow='none'">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#fce87e"/>
+          <stop offset="50%" stop-color="#fc7efa"/>
+          <stop offset="100%" stop-color="#7efcf6"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig)" stroke-width="2"/>
+      <circle cx="12" cy="12" r="4" stroke="url(#ig)" stroke-width="2"/>
+      <circle cx="17.5" cy="6.5" r="1" fill="url(#ig)"/>
+    </svg>
+  </a>
+  <a href="https://www.tiktok.com/@radio.v32waves" target="_blank" title="TikTok" style="display:flex; align-items:center; justify-content:center; width:38px; height:38px; border:1px solid #1e2240; background:rgba(13,15,30,0.8); backdrop-filter:blur(8px); border-radius:8px; transition:all 0.2s; text-decoration:none;" onmouseover="this.style.borderColor='#7efcf6'; this.style.boxShadow='0 0 16px rgba(126,252,246,0.3)'" onmouseout="this.style.borderColor='#1e2240'; this.style.boxShadow='none'">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tt" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7efcf6"/>
+          <stop offset="100%" stop-color="#fc7efa"/>
+        </linearGradient>
+      </defs>
+      <path d="M19 3h-1a4 4 0 0 1-4-4v0h-3v13a2 2 0 1 1-2-2v0-3a5 5 0 1 0 5 5V9a7 7 0 0 0 5 2V8a4 4 0 0 1-4-4V3h4z" stroke="url(#tt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M9 17a2 2 0 1 0 2-2v3" stroke="url(#tt)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M15 3a4 4 0 0 0 4 4" stroke="url(#tt)" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+  </a>
+</div>
+
+<!-- Floating background glyphs -->
+<div class="float-glyphs" id="floatGlyphs"></div>
+
+<div class="wrapper">
+  <header>
+    <div class="logo-glyphs">あ ك 한 δ ш ☰</div>
+    <h1>GLYPHSHIFT</h1>
+    <p class="tagline">Encode secrets in plain sight</p>
+    <p style="margin-top:8px; font-size:0.75rem; color:var(--accent2); letter-spacing:0.15em;">made by radio.v32waves</p>
+  </header>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('encode')">⬡ Encode</button>
+      <button class="tab" onclick="switchTab('decode')">⬡ Decode</button>
+    </div>
+
+    <!-- ENCODE PANEL -->
+    <div class="panel active" id="panel-encode">
+      <label>Enter a word or short phrase</label>
+      <input type="text" id="encodeInput" placeholder="e.g. hello" maxlength="200" oninput="clearOutput('encode')">
+      <div class="error-msg" id="encodeError">⚠ Please enter something to encode</div>
+      <button class="btn" onclick="doEncode()">◈ Generate Glyph Code</button>
+
+      <div class="output-area" id="encodeOutput">
+        <label>Your secret glyph message</label>
+        <div class="output-box" id="encodeResult"></div>
+        <div class="copy-row">
+          <button class="copy-btn" onclick="copyCode()">Copy</button>
+          <span class="copy-status" id="copyStatus">✓ Copied!</span>
+        </div>
+        <div style="margin-top:10px; font-size:0.72rem; color:var(--muted); line-height:1.7;">
+          Send this to anyone. They paste it into the <span style="color:var(--accent2)">Decode</span> tab to reveal your hidden message.
+        </div>
+      </div>
+    </div>
+
+    <!-- DECODE PANEL -->
+    <div class="panel" id="panel-decode">
+      <label>Paste a GLYPHSHIFT code <span class="auto-badge">auto-detect</span></label>
+      <textarea id="decodeInput" rows="3" placeholder="Paste glyph code here…" oninput="onDecodeInput()"></textarea>
+      <div class="error-msg" id="decodeError">⚠ This doesn't look like a valid GLYPHSHIFT code</div>
+      <button class="btn decode-btn" onclick="doDecode()">◈ Reveal Hidden Message</button>
+
+      <div class="output-area" id="decodeOutput">
+        <div class="output-box decode-result">
+          <div class="decode-label">Hidden message revealed</div>
+          <div class="original-word" id="decodeResult"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-strip">
+    <strong>HOW IT WORKS —</strong> Your word is secretly encoded inside the glyph string using a hidden pattern. 
+    The glyphs are drawn from Japanese (hiragana/katakana), Arabic, Korean (hangul), Greek, Cyrillic, 
+    and Chinese characters. Anyone who pastes the code into the Decode tab will see the original word revealed. 
+    No servers, no accounts — everything runs in your browser.
+  </div>
+
+  <footer>
+    GLYPHSHIFT MADE BY LOVE — All encoding happens locally in your browser. Nothing is sent anywhere.
+  </footer>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// GLYPH POOLS — decorative characters per script
+// ─────────────────────────────────────────────
+const SCRIPTS = {
+  hiragana: 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん',
+  katakana: 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン',
+  arabic: 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي',
+  korean: '가나다라마바사아자차카타파하갈날달랄말발살알잘찰칼탈팔할',
+  greek: 'αβγδεζηθικλμνξοπρστυφχψω',
+  cyrillic: 'абвгдежзийклмнопрстуфхцчшщъыьэюя',
+  cjk: '龍虎鳳凰天地人山水火風雷電日月星雲海河'
+};
+
+const ALL_GLYPHS = Object.values(SCRIPTS).join('');
+
+// ─────────────────────────────────────────────
+// ENCODING SYSTEM
+// The original text is hidden using a steganographic technique:
+// We embed each character's Unicode code point as a sequence of
+// "selector" glyphs from a fixed alphabet of 16 glyphs (hex digits → glyphs).
+// The encoded string = MARKER + encoded_payload + MARKER
+// Surrounding noise glyphs make it look like random foreign text.
+// ─────────────────────────────────────────────
+
+// 16 unique glyphs used as our encoding alphabet (never overlap with noise)
+const ENCODE_ALPHA = ['★','☆','◆','◇','●','○','■','□','▲','△','▼','▽','♦','♠','♣','♥'];
+// Marker to identify start/end of hidden payload
+const START_MARKER = '⟦';
+const END_MARKER = '⟧';
+
+function encodeText(text) {
+  // Convert text to hex-digit sequence mapped to ENCODE_ALPHA
+  let payload = '';
+  for (let i = 0; i < text.length; i++) {
+    const code = text.charCodeAt(i);
+    // Encode as 4 hex digits = 4 ENCODE_ALPHA chars
+    const hex = code.toString(16).padStart(4, '0');
+    for (const h of hex) {
+      payload += ENCODE_ALPHA[parseInt(h, 16)];
+    }
+    // Add separator between chars (index 0 = ENCODE_ALPHA[0] repeated? No — use a length marker)
+  }
+
+  // Wrap in markers
+  const secret = START_MARKER + payload + END_MARKER;
+
+  // Generate noise: random decorative glyphs interspersed
+  // We want the total string to look like ~4-8 glyphs per input char
+  const noiseLength = Math.max(12, text.length * 4);
+  const noiseGlyphs = [];
+  for (let i = 0; i < noiseLength; i++) {
+    noiseGlyphs.push(randomGlyph());
+  }
+
+  // Insert the secret somewhere in the middle of the noise
+  const insertAt = Math.floor(noiseLength * 0.3 + Math.random() * noiseLength * 0.4);
+  noiseGlyphs.splice(insertAt, 0, secret);
+
+  return noiseGlyphs.join('');
+}
+
+function decodeText(encoded) {
+  const start = encoded.indexOf(START_MARKER);
+  const end = encoded.indexOf(END_MARKER);
+  if (start === -1 || end === -1 || end <= start) return null;
+
+  const payload = encoded.slice(start + START_MARKER.length, end);
+
+  // Each character = 4 ENCODE_ALPHA symbols
+  if (payload.length % 4 !== 0) return null;
+
+  let result = '';
+  for (let i = 0; i < payload.length; i += 4) {
+    let hexStr = '';
+    for (let j = 0; j < 4; j++) {
+      const idx = ENCODE_ALPHA.indexOf(payload[i + j]);
+      if (idx === -1) return null;
+      hexStr += idx.toString(16);
+    }
+    const code = parseInt(hexStr, 16);
+    if (isNaN(code)) return null;
+    result += String.fromCharCode(code);
+  }
+
+  return result;
+}
+
+function randomGlyph() {
+  // Exclude ENCODE_ALPHA chars and markers from noise
+  let c;
+  do {
+    c = ALL_GLYPHS[Math.floor(Math.random() * ALL_GLYPHS.length)];
+  } while (ENCODE_ALPHA.includes(c));
+  return c;
+}
+
+// ─────────────────────────────────────────────
+// UI
+// ─────────────────────────────────────────────
+let currentEncoded = '';
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && tab === 'encode') || (i === 1 && tab === 'decode'));
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+function doEncode() {
+  const input = document.getElementById('encodeInput').value.trim();
+  const errEl = document.getElementById('encodeError');
+
+  if (!input) {
+    errEl.classList.add('show');
+    return;
+  }
+  errEl.classList.remove('show');
+
+  currentEncoded = encodeText(input);
+
+  const resultEl = document.getElementById('encodeResult');
+  resultEl.innerHTML = '';
+
+  // Animate each character in
+  const chars = [...currentEncoded];
+  chars.forEach((ch, i) => {
+    const span = document.createElement('span');
+    span.className = 'glyph-char';
+    span.textContent = ch;
+    span.style.animationDelay = `${i * 18}ms`;
+    resultEl.appendChild(span);
+  });
+
+  const outputArea = document.getElementById('encodeOutput');
+  outputArea.classList.add('visible');
+
+  // Reset copy status
+  document.getElementById('copyStatus').classList.remove('show');
+}
+
+function doDecode() {
+  const input = document.getElementById('decodeInput').value.trim();
+  const errEl = document.getElementById('decodeError');
+
+  if (!input) {
+    errEl.classList.add('show');
+    return;
+  }
+
+  const decoded = decodeText(input);
+
+  if (!decoded) {
+    errEl.classList.add('show');
+    document.getElementById('decodeOutput').classList.remove('visible');
+    return;
+  }
+
+  errEl.classList.remove('show');
+  document.getElementById('decodeResult').textContent = decoded;
+  const outputArea = document.getElementById('decodeOutput');
+  outputArea.classList.remove('visible');
+  // Trigger reflow for animation restart
+  void outputArea.offsetWidth;
+  outputArea.classList.add('visible');
+}
+
+function onDecodeInput() {
+  document.getElementById('decodeError').classList.remove('show');
+  // Auto-decode as user types/pastes
+  const input = document.getElementById('decodeInput').value.trim();
+  if (!input) {
+    document.getElementById('decodeOutput').classList.remove('visible');
+    return;
+  }
+  const decoded = decodeText(input);
+  if (decoded) {
+    document.getElementById('decodeResult').textContent = decoded;
+    document.getElementById('decodeOutput').classList.add('visible');
+  }
+}
+
+function clearOutput(tab) {
+  if (tab === 'encode') {
+    document.getElementById('encodeOutput').classList.remove('visible');
+    document.getElementById('encodeError').classList.remove('show');
+  }
+}
+
+function copyCode() {
+  if (!currentEncoded) return;
+  navigator.clipboard.writeText(currentEncoded).then(() => {
+    const s = document.getElementById('copyStatus');
+    s.classList.add('show');
+    setTimeout(() => s.classList.remove('show'), 2000);
+  });
+}
+
+function toggleDeploy() {
+  const body = document.getElementById('deployBody');
+  body.classList.toggle('open');
+}
+
+// ─────────────────────────────────────────────
+// FLOATING BACKGROUND GLYPHS
+// ─────────────────────────────────────────────
+(function spawnFloaters() {
+  const container = document.getElementById('floatGlyphs');
+  const floaterGlyphs = 'あかさたなはまやらわアカサタナハマヤラワ가나다라마바사自然火水風천지인αβγδεζабвгде';
+
+  function spawn() {
+    const el = document.createElement('div');
+    el.className = 'float-glyph';
+    el.textContent = floaterGlyphs[Math.floor(Math.random() * floaterGlyphs.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (0.8 + Math.random() * 2) + 'rem';
+    const dur = 15 + Math.random() * 25;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = Math.random() * -dur + 's';
+    el.style.color = `rgba(${
+      Math.random() > 0.5 ? '126,252,246' : Math.random() > 0.5 ? '252,126,250' : '252,232,126'
+    },${0.02 + Math.random() * 0.05})`;
+    container.appendChild(el);
+    // Remove and re-add periodically
+    setTimeout(() => {
+      el.remove();
+      spawn();
+    }, (dur + 5) * 1000);
+  }
+
+  for (let i = 0; i < 30; i++) spawn();
+})();
+
+// Allow pressing Enter in encode input
+document.getElementById('encodeInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doEncode();
+});
+</script>
+</body>
+</html>
